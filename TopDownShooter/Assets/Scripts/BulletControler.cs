@@ -12,11 +12,8 @@ public class BulletControler : MonoBehaviour {
     }
 
     void FixedUpdate()
-    {
-        if (target != new Vector3(0, 0, 0))
-        {
+    {     
             transform.Translate(new Vector3(0, 1, 0) * speed * Time.deltaTime);
-        }
     }
     public void setTarget(Vector3 target)
     {
@@ -28,10 +25,9 @@ public class BulletControler : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Shooter victim = other.GetComponent<Shooter>();
-        if (victim.touched(shooter))
-            Destroy(this);
-        
+		Shooter victim;
+		if ((victim = other.GetComponent<Shooter>()) != null)
+			if (victim.touched (shooter))
+				Destroy (this.gameObject);
     }
-    
 }

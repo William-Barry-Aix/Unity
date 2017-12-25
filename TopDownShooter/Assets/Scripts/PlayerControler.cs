@@ -61,6 +61,8 @@ public class PlayerControler : MonoBehaviour, Shooter {
         if (shooter.hurt(this))
         {
             lifes--;
+			if (lifes <= 0)
+				Destroy (this.gameObject);
             return true;
         }
         return false;

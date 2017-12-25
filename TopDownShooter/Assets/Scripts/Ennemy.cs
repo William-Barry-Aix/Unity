@@ -21,22 +21,25 @@ public class Ennemy : MonoBehaviour, Shooter
     // Update is called once per frame
     void Update()
     {
-        Cible = GameObject.FindGameObjectWithTag("Player");
-        pointToLook = Cible.transform.position;
-        ptsAngle = Mathf.Atan2(pointToLook.y - transform.position.y, pointToLook.x - transform.position.x) * (180f / Mathf.PI);
-        diff = ptsAngle - angle;
-        angle = ptsAngle;
-        gun.transform.RotateAround(transform.position, Vector3.forward, diff);
-        gun.setTarget(this.pointToLook);
-        gun.setShooter(this);
-        gun.isFiring = true;
-
+		if (Cible = GameObject.FindGameObjectWithTag ("Player")) {
+			pointToLook = Cible.transform.position;
+			ptsAngle = Mathf.Atan2 (pointToLook.y - transform.position.y, pointToLook.x - transform.position.x) * (180f / Mathf.PI);
+			diff = ptsAngle - angle;
+			angle = ptsAngle;
+			gun.transform.RotateAround (transform.position, Vector3.forward, diff);
+			gun.setTarget (this.pointToLook);
+			gun.setShooter (this);
+			gun.isFiring = true;
+		} else
+			gun.isFiring = false;
     }
     public bool touched(Shooter shooter)
     {
         if (shooter.hurt(this))
         {
             lifes--;
+			if (lifes <= 0)
+				Destroy(this.gameObject);
             return true;
         }
         return false;
