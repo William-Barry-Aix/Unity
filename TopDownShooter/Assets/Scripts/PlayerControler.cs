@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControler : MonoBehaviour, Shooter {
+	public Text lifeIU;
     public int lifes = 5;
     public float moveSpeed;
     private Rigidbody2D myRigidbody;
@@ -13,11 +15,10 @@ public class PlayerControler : MonoBehaviour, Shooter {
     private float ptsAngle;
     private float diff;
     public Gun gun;
-    //public bool ok;
     private Vector3 pointToLook;
     private Camera mainCamera;
-    // Use this for initialization
 	void Start () {
+		lifeIU.text = "Lifes : " + lifes.ToString();
         myRigidbody = GetComponent<Rigidbody2D>();
         mainCamera = FindObjectOfType<Camera>();
     }
@@ -40,7 +41,6 @@ public class PlayerControler : MonoBehaviour, Shooter {
             diff = ptsAngle - angle;
             angle = ptsAngle;
             gun.transform.RotateAround(transform.position, Vector3.forward, diff);
-            gun.setTarget(this.pointToLook);
             gun.setShooter(this);
             //Debug.Log(getPointToLook().x + "" + getPointToLook().y);
         }
@@ -61,6 +61,7 @@ public class PlayerControler : MonoBehaviour, Shooter {
         if (shooter.hurt(this))
         {
             lifes--;
+			lifeIU.text = "Lifes : " + lifes.ToString();
 			if (lifes <= 0)
 				Destroy (this.gameObject);
             return true;

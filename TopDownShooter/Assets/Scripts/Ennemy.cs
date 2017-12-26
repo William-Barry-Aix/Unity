@@ -27,7 +27,6 @@ public class Ennemy : MonoBehaviour, Shooter
 			diff = ptsAngle - angle;
 			angle = ptsAngle;
 			gun.transform.RotateAround (transform.position, Vector3.forward, diff);
-			gun.setTarget (this.pointToLook);
 			gun.setShooter (this);
 			gun.isFiring = true;
 		} else

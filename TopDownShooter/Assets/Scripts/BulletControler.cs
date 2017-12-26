@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletControler : MonoBehaviour {
     private Shooter shooter;
     public float speed = 5;
-    private Vector3 target;
     public bool outOfScreen = false;
     void Start () {
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * speed/2, transform.localScale.z);
@@ -14,10 +13,6 @@ public class BulletControler : MonoBehaviour {
     void FixedUpdate()
     {     
             transform.Translate(new Vector3(0, 1, 0) * speed * Time.deltaTime);
-    }
-    public void setTarget(Vector3 target)
-    {
-        this.target = target;
     }
     public void setShooter(Shooter shooter)
     {
