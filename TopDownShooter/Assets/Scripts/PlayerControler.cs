@@ -30,14 +30,15 @@ public class PlayerControler : MonoBehaviour, Shooter {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.forward, Vector3.zero);
         //Debug.DrawLine(Vector3.forward, Vector3.zero);
-        float rayLength;
+        float rayLength;    
 
         if (groundPlane.Raycast(cameraRay, out rayLength))
         {
             pointToLook = cameraRay.GetPoint(rayLength);
             //Debug.DrawLine(cameraRay.origin, pointToLook, Color.red);
             //Debug.DrawLine(transform.position, pointToLook);
-            ptsAngle = Mathf.Atan2(pointToLook.y - transform.position.y, pointToLook.x - transform.position.x) * (180f / Mathf.PI);
+            ptsAngle = Mathf.Atan2(pointToLook.y - transform.position.y,
+                                   pointToLook.x - transform.position.x) * (180f / Mathf.PI);
             diff = ptsAngle - angle;
             angle = ptsAngle;
             gun.transform.RotateAround(transform.position, Vector3.forward, diff);
